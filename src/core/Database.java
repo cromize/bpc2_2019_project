@@ -22,7 +22,7 @@ public class Database {
     try {
       // instantiate using name from Job enum
       AEmployee empl = (AEmployee) Class.forName("cz.vutbr.feec.empl." + job.toString()).getDeclaredConstructor(Integer.TYPE, String.class).newInstance(id, name);
-      System.out.println(empl.getName());
+      employees.put(id, empl);
     } catch (Exception e) {
       e.printStackTrace();
     }
