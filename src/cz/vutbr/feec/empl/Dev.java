@@ -1,8 +1,8 @@
 package cz.vutbr.feec.empl;
 
 public class Dev extends AEmployee {
-  public Dev(int id, String name, long salary) {
-    super(id, name, salary);
+  public Dev(int id, String name) {
+    super(id, name);
   }
 
   @Override

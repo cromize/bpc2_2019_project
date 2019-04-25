@@ -5,7 +5,7 @@ public abstract class AEmployee {
   protected String name;
   protected long salary;
 
-  public AEmployee(int id, String name, long salary) {
+  public AEmployee(int id, String name) {
     super();
     this.setId(id);
     this.setName(name);

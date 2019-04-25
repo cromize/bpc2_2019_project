@@ -1,8 +1,8 @@
 package cz.vutbr.feec.empl;
 
 public class CEO extends AEmployee {
-  public CEO(int id, String name, long salary) {
-    super(id, name, salary);
+  public CEO(int id, String name) {
+    super(id, name);
   }
   
   @Override
