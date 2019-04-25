@@ -1,16 +1,18 @@
 package cz.vutbr.feec.empl;
 
-public class AbstractEmployee {
+public abstract class AEmployee {
   protected int id;
   protected String name;
   protected long salary;
 
-  public AbstractEmployee(int id, String name, long salary) {
+  public AEmployee(int id, String name, long salary) {
     super();
     this.setId(id);
     this.setName(name);
     this.setSalary(salary);
   }
+  
+  public abstract void work();
   
   public int getId() {
     return id;
