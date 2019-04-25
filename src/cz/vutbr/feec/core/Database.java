@@ -1,4 +1,4 @@
-package core;
+package cz.vutbr.feec.core;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package cz.vutbr.feec;
 
-import core.Database;
+import cz.vutbr.feec.core.Database;
 import cz.vutbr.feec.empl.AEmployee;
 import cz.vutbr.feec.empl.Assistant;
 import cz.vutbr.feec.empl.CEO;

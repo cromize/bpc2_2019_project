@@ -5,11 +5,11 @@ public abstract class AEmployee {
   protected String name;
   protected long salary;
 
-  public AEmployee(int id, String name) {
+  public AEmployee(int id, String name, long wage) {
     super();
-    this.setId(id);
-    this.setName(name);
-    this.setSalary(salary);
+    setId(id);
+    setName(name);
+    setSalary(wage);
   }
   
   public abstract void work();

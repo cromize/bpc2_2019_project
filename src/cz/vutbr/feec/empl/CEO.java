@@ -2,12 +2,12 @@ package cz.vutbr.feec.empl;
 
 public class CEO extends AEmployee {
   public CEO(int id, String name) {
-    super(id, name);
+    super(id, name, 350);
   }
   
   @Override
   public void work() {
-    System.out.println("CEO");
+    System.out.printf("CEO: %d kc/h\n", salary);
   }
   
 
