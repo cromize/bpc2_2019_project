@@ -1,6 +1,8 @@
 package cz.vutbr.feec.empl;
 
 public abstract class AEmployee {
+  
+
   protected int id;
   protected String name;
   protected long salary;

@@ -10,7 +10,7 @@ import cz.vutbr.feec.empl.Tech;
 public class App {
   public static void main(String[] args) {
     Database db = new Database();
-    db.addEmpl("name", 1337, Database.Job.Assistant);
+    db.addEmployee("name", 1337, new CEO(1337, "name"));
     
     AEmployee ceo = new CEO(1337, "name");
     AEmployee ass = new Assistant(1337, "name");

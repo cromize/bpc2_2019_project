@@ -7,8 +7,7 @@ public class CEO extends AEmployee {
   
   @Override
   public void work() {
-    System.out.printf("CEO: %d kc/h\n", salary);
+    System.out.printf("%s: %d kc/h\n", this.getClass().getSimpleName(), salary);
   }
-  
 
 }
