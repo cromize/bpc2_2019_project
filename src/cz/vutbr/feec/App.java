@@ -13,6 +13,8 @@ public class App {
   public static void main(String[] args) {
     Database db = new Database();
     db.addEmployee(new CEO(1337, "name"));
+    db.addEmployee(new Assistant(1338, "name"));
+    db.removeEmployee(1337);
     
     db.addJob(new AssistJob());
     db.addJob(new DevJob());

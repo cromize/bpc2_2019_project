@@ -21,6 +21,10 @@ public class Database {
     employees.put(empl.getId(), empl);
   }
   
+  public void removeEmployee(int id) {
+    employees.remove(id);
+  }
+  
   public void addJob(AJob job) {
     jobs.add(job);
   }
