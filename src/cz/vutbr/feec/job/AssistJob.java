@@ -8,7 +8,7 @@ public class AssistJob extends AJob implements IJob {
 
   @Override
   public void doJob() {
-    System.out.println("do assist");
+    System.out.println("Vsechny informace o " + worker.getName());
   }
 
 }

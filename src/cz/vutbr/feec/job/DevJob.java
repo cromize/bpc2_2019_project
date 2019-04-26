@@ -8,8 +8,8 @@ public class DevJob extends AJob implements IJob {
 
   @Override
   public void doJob() {
-    System.out.println("do dev");
-    
+    String rev = new StringBuilder(worker.getName()).reverse().toString();
+    System.out.println("Me jmeno pozpatku je " + rev);
   }
 
 }

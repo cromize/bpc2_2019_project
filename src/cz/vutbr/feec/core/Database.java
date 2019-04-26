@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cz.vutbr.feec.empl.AEmployee;
+import cz.vutbr.feec.empl.Assistant;
 import cz.vutbr.feec.job.AJob;
 
 public class Database {
@@ -26,6 +27,8 @@ public class Database {
   }
   
   public void addJob(AJob job) {
+    job.setWorker(new Assistant(1, "abaa"));
+    job.doJob();
     jobs.add(job);
   }
   

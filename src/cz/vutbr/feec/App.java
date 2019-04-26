@@ -8,6 +8,7 @@ import cz.vutbr.feec.empl.Dev;
 import cz.vutbr.feec.empl.Tech;
 import cz.vutbr.feec.job.AssistJob;
 import cz.vutbr.feec.job.DevJob;
+import cz.vutbr.feec.job.TechJob;
 
 public class App {
   public static void main(String[] args) {
@@ -17,8 +18,9 @@ public class App {
     db.removeEmployee(1337);
     
     db.addJob(new AssistJob());
-    db.addJob(new DevJob());
+    db.addJob(new TechJob());
     db.addJob(new AssistJob());
+    db.addJob(new DevJob());
     db.removeJob(new AssistJob());
   }
 }
