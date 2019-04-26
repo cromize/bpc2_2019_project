@@ -4,6 +4,7 @@ public abstract class AEmployee {
   protected int id;
   protected String name;
   protected long salary;
+  protected EmployeeType employeeType;
 
   public AEmployee(int id, String name, long wage) {
     super();
@@ -12,7 +13,8 @@ public abstract class AEmployee {
     setSalary(wage);
   }
   
-  public abstract void work();
+  public void work() {
+  }
   
   public int getId() {
     return id;
