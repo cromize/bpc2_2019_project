@@ -1,16 +1,25 @@
 package cz.vutbr.feec.empl;
 
+import cz.vutbr.feec.job.AJob;
+
 public abstract class AEmployee {
   protected int id;
   protected String name;
-  protected long salary;
+  protected int wage;
+  protected int workHours;
   protected EmployeeType employeeType;
+  private static int maxWorkHours = 0;
 
-  public AEmployee(int id, String name, long wage) {
+  public AEmployee()  {
+  }
+
+  public AEmployee(int id, String name, int wage) {
     super();
     setId(id);
     setName(name);
-    setSalary(wage);
+    setWage(wage);
+    setWorkHours(0);
+    employeeType = EmployeeType.ACTIVE;
   }
   
   public void work() {
@@ -32,11 +41,40 @@ public abstract class AEmployee {
     this.name = name;
   }
 
-  public long getSalary() {
-    return salary;
+  public int getWage() {
+    return wage;
   }
 
-  public void setSalary(long salary) {
-    this.salary = salary;
+  public void setWage(int wage) {
+    this.wage = wage;
+  }
+  
+  public void setWorkHours(int workHours) {
+    this.workHours = workHours;
+  }
+
+  public int getWorkHours() {
+    return workHours;
+  }
+
+  public EmployeeType getType() {
+    return employeeType;
+  }
+
+  public void increaseWorkHours(int workHours) {
+    this.workHours += workHours;
+  }
+
+  public void decreaseWorkHours(int workHours) {
+    this.workHours -= workHours;
+  }
+
+  public boolean canDoJob(AJob job) {
+    for (AEmployee x : job.getQualifiedList()) {
+      if (this.getClass().isInstance(x)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

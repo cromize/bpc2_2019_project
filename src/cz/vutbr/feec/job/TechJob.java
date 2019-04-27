@@ -1,9 +1,15 @@
 package cz.vutbr.feec.job;
 
+import cz.vutbr.feec.empl.AEmployee;
+import cz.vutbr.feec.empl.CEO;
+import cz.vutbr.feec.empl.Dev;
+import cz.vutbr.feec.empl.Tech;
+
 public class TechJob extends AJob implements IJob {
 
   public TechJob() {
     super();
+    qualified = new AEmployee[] {new CEO(), new Dev(), new Tech()};
   }
 
   @Override
