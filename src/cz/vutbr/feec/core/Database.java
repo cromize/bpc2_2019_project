@@ -43,6 +43,10 @@ public class Database {
     }
     employees.remove(id);
   }
+  
+  public AEmployee getEmployee(int id) {
+    return employees.get(id);
+  }
 
   public void addJob(AJob job) {
     AEmployee empl = getBestWorkerForJob(job);
@@ -88,5 +92,14 @@ public class Database {
     }
   }
   
+  public List<AJob> getWorkerJobs(AEmployee empl) {
+    List<AJob> workerJobs = new LinkedList<>();
+    for (AJob x : jobs) {
+      if (x.getWorker().getClass().isInstance(empl)) {
+        workerJobs.add(x);
+      }
+    }
+    return workerJobs;
+  }
   
 }

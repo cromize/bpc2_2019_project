@@ -1,5 +1,7 @@
 package cz.vutbr.feec;
 
+import java.util.List;
+
 import cz.vutbr.feec.core.Database;
 import cz.vutbr.feec.empl.AEmployee;
 import cz.vutbr.feec.empl.Assistant;
@@ -21,16 +23,15 @@ public class App {
     for (int i = 0; i < 1; i++) {
       db.addJob(new AssistJob());
     }
-
-    for (AJob x : db.jobs) {
-      System.out.println(x.getWorker());
-    }
+    
+    List<AJob> jobs = db.getWorkerJobs(db.getEmployee(1339));
+    System.out.println(jobs.toString());
 
     db.addEmployee(new Assistant(1338, "name"));
     db.rebalanceJobs();
 
-    for (AJob x : db.jobs) {
-      System.out.println(x.getWorker());
-    }
+    jobs = db.getWorkerJobs(db.getEmployee(1338));
+    System.out.println(jobs.toString());
+
   }
 }
