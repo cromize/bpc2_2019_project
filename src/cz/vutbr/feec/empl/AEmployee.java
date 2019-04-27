@@ -92,5 +92,11 @@ public abstract class AEmployee {
   public static void setMaxWorkHours(int workHours) {
     maxWorkHours = workHours;
   }
+  
+  @Override 
+  public String toString() {
+    return String.format("ID: %d  Jmeno: %s  Pozice: %s", getId(), getName(), getClass().getSimpleName());
+  }
+  
 
 }
