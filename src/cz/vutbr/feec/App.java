@@ -2,6 +2,7 @@ package cz.vutbr.feec;
 
 import java.util.List;
 
+import cz.vutbr.feec.core.Core;
 import cz.vutbr.feec.core.Database;
 import cz.vutbr.feec.model.empl.AEmployee;
 import cz.vutbr.feec.model.empl.Assistant;
@@ -12,10 +13,17 @@ import cz.vutbr.feec.model.job.AJob;
 import cz.vutbr.feec.model.job.AssistJob;
 import cz.vutbr.feec.model.job.DevJob;
 import cz.vutbr.feec.model.job.TechJob;
+import cz.vutbr.feec.view.CLIView;
 
 public class App {
   public static void main(String[] args) {
     Database db = new Database();
+    CLIView view = new CLIView();
+    Core core = new Core(view, db);
+    
+    core.promptMenu(13);
+    System.exit(0);
+
     AEmployee.setMaxWorkHours(1);
     //db.addEmployee(new CEO(1337, "name"));
     db.addEmployee(new Assistant(1339, "name"));
