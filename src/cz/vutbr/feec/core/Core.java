@@ -17,8 +17,26 @@ public class Core {
     this.cliInput = new BufferedReader(new InputStreamReader(System.in));
   }
   
-  public int promptMenu(int max) {
-    view.printMenu();
+  public void run() {
+    view.printWelcome();
+    while (true) {
+      view.printMenu();
+      int choice = promptChoice(ProgramState.values().length);
+      execute(choice);
+    }
+  }
+  
+  public void execute(int operation) {
+    switch (ProgramState.valueOfId(operation)) {
+    case ADD_EMPL:
+      view.printEmployeePositions();
+      int choice = promptChoice(4);
+      break;
+    }
+    
+  }
+  
+  public int promptChoice(int max) {
     do {
       try {
         System.out.print("\nZadejte moznost: ");

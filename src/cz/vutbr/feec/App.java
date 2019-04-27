@@ -21,7 +21,8 @@ public class App {
     CLIView view = new CLIView();
     Core core = new Core(view, db);
     
-    core.promptMenu(13);
+    core.run();
+    
     System.exit(0);
 
     AEmployee.setMaxWorkHours(1);

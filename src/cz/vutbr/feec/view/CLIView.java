@@ -6,11 +6,11 @@ public class CLIView {
   }
   
   public void printWelcome() {
-    System.out.printf("*** Manazer Zamestnancu ***\n\n");
+    System.out.printf("*** Manazer Zamestnancu ***\n");
   }
   
   public void printMenu() {
-    System.out.printf("*** Moznosti: \n"
+    System.out.printf("\n*** Moznosti: \n"
                     + " 1) Pridat zamestnance\n"
                     + " 2) Propustit zamestnance\n"
                     + " 3) Nastavit status nemocny\n"
@@ -27,6 +27,14 @@ public class CLIView {
                     + "\n"
                     + "12) Ulozit databazi\n"
                     + "13) Nahrat databazi\n");
+  }
+  
+  public void printEmployeePositions() {
+    System.out.printf("\n*** Pozice: \n"
+                    + " 1) Asistent\n"
+                    + " 2) Technicky pracovnik\n"
+                    + " 3) Vyvojovy pracovnik\n"
+                    + " 4) Reditel\n");
   }
 
 }
