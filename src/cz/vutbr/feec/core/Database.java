@@ -15,8 +15,7 @@ import cz.vutbr.feec.job.AJob;
 public class Database {
   private boolean ceoInHouse;
   private Map<Integer, AEmployee> employees;
-  // TODO: make private
-  public List<AJob> jobs;
+  private List<AJob> jobs;
   
   public Database() {
     employees = new HashMap<>();
@@ -113,6 +112,30 @@ public class Database {
       }
     }
     return workerJobs;
+  }
+  
+  public List<AEmployee> getDepartmentWorkers(AEmployee department) {
+    List<AEmployee> workers = new LinkedList<>();
+    for (AJob x : jobs) {
+      if (x.getWorker().getClass().isInstance(department)) {
+        workers.add(x.getWorker());
+      }
+    }
+    return workers;
+  }
+  
+  public int getDepartmentFreeHours(AEmployee department) {
+    int freeHours = Integer.MAX_VALUE;
+    for (AJob x : jobs) {
+      if (x.getWorker().getClass().isInstance(department)) {
+        // when maxWorkHours is set
+        if (AEmployee.getMaxWorkHours() != Integer.MAX_VALUE) {
+          freeHours += AEmployee.getMaxWorkHours() - x.getWorker().getWorkHours();
+        }
+      }
+    }
+    return freeHours;
+    
   }
   
 }
