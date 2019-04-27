@@ -8,7 +8,7 @@ public abstract class AEmployee {
   protected int wage;
   protected int workHours;
   protected EmployeeType employeeType;
-  private static int maxWorkHours = 10;
+  private static int maxWorkHours = Integer.MAX_VALUE;
 
   public AEmployee()  {
   }
@@ -52,7 +52,7 @@ public abstract class AEmployee {
   public void setWorkHours(int workHours) {
     this.workHours = workHours;
   }
-
+  
   public int getWorkHours() {
     return workHours;
   }
@@ -79,7 +79,17 @@ public abstract class AEmployee {
   }
   
   public boolean canWorkMore() {
+    if (this instanceof CEO) return true;
     if (workHours < maxWorkHours) return true;
     return false;
   }
+
+  public static int getMaxWorkHours() {
+    return maxWorkHours;
+  }
+  
+  public static void setMaxWorkHours(int workHours) {
+    maxWorkHours = workHours;
+  }
+
 }
