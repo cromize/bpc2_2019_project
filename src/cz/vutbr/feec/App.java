@@ -14,14 +14,17 @@ import cz.vutbr.feec.job.TechJob;
 public class App {
   public static void main(String[] args) {
     Database db = new Database();
-    db.addEmployee(new CEO(1337, "name"));
-    db.addEmployee(new Assistant(1338, "name"));
+    AEmployee.setMaxWorkHours(1);
+    //db.addEmployee(new CEO(1337, "name"));
     db.addEmployee(new Dev(1339, "name"));
-    db.addEmployee(new Dev(1340, "name"));
+    db.addEmployee(new Assistant(1338, "name"));
     
-    for (int i = 0; i < 4 * 10; i++) {
+    for (int i = 0; i < 1; i++) {
+      db.addJob(new AssistJob());
       db.addJob(new AssistJob());
     }
+    
+    //db.removeJob(new AssistJob());
 
     for (AJob x : db.jobs) {
       System.out.println(x.getWorker());
