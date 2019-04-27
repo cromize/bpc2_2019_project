@@ -3,15 +3,15 @@ package cz.vutbr.feec;
 import java.util.List;
 
 import cz.vutbr.feec.core.Database;
-import cz.vutbr.feec.empl.AEmployee;
-import cz.vutbr.feec.empl.Assistant;
-import cz.vutbr.feec.empl.CEO;
-import cz.vutbr.feec.empl.Dev;
-import cz.vutbr.feec.empl.Tech;
-import cz.vutbr.feec.job.AJob;
-import cz.vutbr.feec.job.AssistJob;
-import cz.vutbr.feec.job.DevJob;
-import cz.vutbr.feec.job.TechJob;
+import cz.vutbr.feec.model.empl.AEmployee;
+import cz.vutbr.feec.model.empl.Assistant;
+import cz.vutbr.feec.model.empl.CEO;
+import cz.vutbr.feec.model.empl.Dev;
+import cz.vutbr.feec.model.empl.Tech;
+import cz.vutbr.feec.model.job.AJob;
+import cz.vutbr.feec.model.job.AssistJob;
+import cz.vutbr.feec.model.job.DevJob;
+import cz.vutbr.feec.model.job.TechJob;
 
 public class App {
   public static void main(String[] args) {

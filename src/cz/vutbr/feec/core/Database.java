@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import cz.vutbr.feec.empl.AEmployee;
-import cz.vutbr.feec.empl.CEO;
-import cz.vutbr.feec.empl.EmployeeType;
-import cz.vutbr.feec.job.AJob;
+import cz.vutbr.feec.model.empl.AEmployee;
+import cz.vutbr.feec.model.empl.CEO;
+import cz.vutbr.feec.model.empl.EmployeeType;
+import cz.vutbr.feec.model.job.AJob;
 
 public class Database {
   private boolean ceoInHouse;
