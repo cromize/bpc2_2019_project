@@ -125,17 +125,30 @@ public class Database {
   }
   
   public int getDepartmentFreeHours(AEmployee department) {
-    int freeHours = Integer.MAX_VALUE;
+    int freeHours = 0;
     for (AJob x : jobs) {
       if (x.getWorker().getClass().isInstance(department)) {
         // when maxWorkHours is set
-        if (AEmployee.getMaxWorkHours() != Integer.MAX_VALUE) {
-          freeHours += AEmployee.getMaxWorkHours() - x.getWorker().getWorkHours();
+        if (AEmployee.getMaxWorkHours() == Integer.MAX_VALUE) {
+          return Integer.MAX_VALUE;
         }
+        freeHours += AEmployee.getMaxWorkHours() - x.getWorker().getWorkHours();
       }
     }
     return freeHours;
     
+  }
+  
+  public int getMonthlyBudget() {
+    int budget = 0;
+    for (AJob x : jobs) {
+      if (x.getWorker().getWorkHours() == 0) {
+        budget += 500;
+      } else {
+        budget += x.getWorker().getWage();
+      }
+    }
+    return budget;
   }
   
 }
