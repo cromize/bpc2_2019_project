@@ -54,6 +54,13 @@ public class Database {
     this.rebalanceJobs();
   }
 
+  public void unsetEmployeeSick(int id) {
+    AEmployee empl = employees.get(id);
+    if (empl.getType() == EmployeeType.INACTIVE) {
+      empl.setType(EmployeeType.ACTIVE);
+    }
+  }
+
   public void addJob(AJob job) {
     AEmployee empl = getBestWorkerForJob(job);
     empl.increaseWorkHours(1);
