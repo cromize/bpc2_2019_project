@@ -34,7 +34,6 @@ public class Database {
       ceoInHouse = true;
     }
 
-    // non CEO
     employees.put(empl.getId(), empl);
   }
   
@@ -44,18 +43,11 @@ public class Database {
     }
     employees.remove(id);
   }
-  
-  public void addJob(AJob job) {
-    Entry<Integer, AEmployee> entry = employees.entrySet()
-                                      .stream()
-                                      .filter(a -> a.getValue().getType() == EmployeeType.ACTIVE &&
-                                                   a.getValue().canDoJob(job) &&
-                                                   a.getValue().canWorkMore())
-                                      .min(Map.Entry.comparingByValue(Comparator.comparingInt(AEmployee::getWage)))
-                                      .get();
 
-    entry.getValue().increaseWorkHours(1);
-    job.setWorker(entry.getValue());
+  public void addJob(AJob job) {
+    AEmployee empl = getBestWorkerForJob(job);
+    empl.increaseWorkHours(1);
+    job.setWorker(empl);
     jobs.add(job);
   }
   
@@ -69,22 +61,32 @@ public class Database {
     jobs.remove(j);
   }
   
-  public AEmployee getHighestPaidEmpl() {
-    Entry<Integer, AEmployee> entry = employees.entrySet()
-                                      .stream()
-                                      .filter(a -> a.getValue().getType() == EmployeeType.ACTIVE)
-                                      .max(Map.Entry.comparingByValue(Comparator.comparingInt(AEmployee::getWage)))
-                                      .get();
-    return entry.getValue();
+  public void rebalanceJobs() {
+    this.resetAllWorkHours();
+    for (AJob x : jobs) {
+      AEmployee empl = this.getBestWorkerForJob(x);
+      empl.increaseWorkHours(1);
+      x.setWorker(empl);
+    }
+    
   }
 
-  public AEmployee getLowestPaidEmpl() {
+  public AEmployee getBestWorkerForJob(AJob job) {
     Entry<Integer, AEmployee> entry = employees.entrySet()
                                       .stream()
-                                      .filter(a -> a.getValue().getType() == EmployeeType.ACTIVE)
+                                      .filter(a -> a.getValue().getType() == EmployeeType.ACTIVE &&
+                                                   a.getValue().canDoJob(job) &&
+                                                   a.getValue().canWorkMore())
                                       .min(Map.Entry.comparingByValue(Comparator.comparingInt(AEmployee::getWage)))
                                       .get();
     return entry.getValue();
   }
-
+  
+  public void resetAllWorkHours() {
+    for (AEmployee x : employees.values()) {
+      x.setWorkHours(0);
+    }
+  }
+  
+  
 }
