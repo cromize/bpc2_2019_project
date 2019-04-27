@@ -22,9 +22,6 @@ public abstract class AEmployee {
     employeeType = EmployeeType.ACTIVE;
   }
   
-  public void work() {
-  }
-  
   public int getId() {
     return id;
   }
@@ -59,6 +56,10 @@ public abstract class AEmployee {
 
   public EmployeeType getType() {
     return employeeType;
+  }
+
+  public void setType(EmployeeType type) {
+    this.employeeType = type;
   }
 
   public void increaseWorkHours(int workHours) {

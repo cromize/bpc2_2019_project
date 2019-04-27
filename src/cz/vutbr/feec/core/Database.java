@@ -42,10 +42,16 @@ public class Database {
       ceoInHouse = false;
     }
     employees.remove(id);
+    this.rebalanceJobs();
   }
   
   public AEmployee getEmployee(int id) {
     return employees.get(id);
+  }
+  
+  public void setEmployeeSick(int id) {
+    employees.get(id).setType(EmployeeType.INACTIVE);
+    this.rebalanceJobs();
   }
 
   public void addJob(AJob job) {

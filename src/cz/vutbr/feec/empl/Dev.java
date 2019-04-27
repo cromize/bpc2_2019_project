@@ -8,9 +8,4 @@ public class Dev extends AEmployee {
     super(id, name, 250);
   }
 
-  @Override
-  public void work() {
-    System.out.printf("%s: %d kc/h\n", this.getClass().getSimpleName(), wage);
-  }
-
 }

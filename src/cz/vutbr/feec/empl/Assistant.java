@@ -9,9 +9,4 @@ public class Assistant extends AEmployee {
     super(id, name, 150);
   }
 
-  @Override
-  public void work() {
-    System.out.printf("%s: %d kc/h\n", this.getClass().getSimpleName(), wage);
-  }
-
 }

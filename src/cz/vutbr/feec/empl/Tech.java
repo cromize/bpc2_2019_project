@@ -8,9 +8,4 @@ public class Tech extends AEmployee {
     super(id, name, 200);
   }
 
-  @Override
-  public void work() {
-    System.out.printf("%s: %d kc/h\n", this.getClass().getSimpleName(), wage);
-  }
-
 }

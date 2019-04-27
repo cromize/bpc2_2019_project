@@ -8,8 +8,4 @@ public class CEO extends AEmployee {
     super(id, name, 350);
   }
   
-  @Override
-  public void work() {
-  }
-
 }
