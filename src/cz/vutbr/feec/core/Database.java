@@ -14,7 +14,7 @@ import cz.vutbr.feec.job.AJob;
 
 public class Database {
   private Map<Integer, AEmployee> employees;
-  private List<AJob> jobs;
+  public List<AJob> jobs;
   
   public Database() {
     employees = new HashMap<>();
@@ -30,11 +30,16 @@ public class Database {
   }
   
   public void addJob(AJob job) {
-    for (AEmployee empl : employees.values()) {
-      
-    }
-    job.setWorker(new Assistant(1, "abaa"));
-    job.doJob();
+    Entry<Integer, AEmployee> entry = employees.entrySet()
+                                      .stream()
+                                      .filter(a -> a.getValue().getType() == EmployeeType.ACTIVE &&
+                                                   a.getValue().canDoJob(job) &&
+                                                   a.getValue().canWorkMore())
+                                      .min(Map.Entry.comparingByValue(Comparator.comparingInt(AEmployee::getWage)))
+                                      .get();
+
+    entry.getValue().increaseWorkHours(1);
+    job.setWorker(entry.getValue());
     jobs.add(job);
   }
   

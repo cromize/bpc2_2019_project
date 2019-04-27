@@ -8,7 +8,7 @@ public abstract class AEmployee {
   protected int wage;
   protected int workHours;
   protected EmployeeType employeeType;
-  private static int maxWorkHours = 0;
+  private static int maxWorkHours = 10;
 
   public AEmployee()  {
   }
@@ -75,6 +75,11 @@ public abstract class AEmployee {
         return true;
       }
     }
+    return false;
+  }
+  
+  public boolean canWorkMore() {
+    if (workHours < maxWorkHours) return true;
     return false;
   }
 }

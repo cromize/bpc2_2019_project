@@ -6,6 +6,7 @@ import cz.vutbr.feec.empl.Assistant;
 import cz.vutbr.feec.empl.CEO;
 import cz.vutbr.feec.empl.Dev;
 import cz.vutbr.feec.empl.Tech;
+import cz.vutbr.feec.job.AJob;
 import cz.vutbr.feec.job.AssistJob;
 import cz.vutbr.feec.job.DevJob;
 import cz.vutbr.feec.job.TechJob;
@@ -15,19 +16,20 @@ public class App {
     Database db = new Database();
     db.addEmployee(new CEO(1337, "name"));
     db.addEmployee(new Assistant(1338, "name"));
-    db.addEmployee(new Dev(1337, "name"));
-    db.addEmployee(new Dev(1337, "name"));
+    db.addEmployee(new Dev(1339, "name"));
+    db.addEmployee(new Dev(1340, "name"));
     
-    db.addJob(new AssistJob());
-    db.addJob(new TechJob());
-    db.addJob(new AssistJob());
-    db.addJob(new DevJob());
-    db.removeJob(new AssistJob());
-    
-    
-    System.out.println(new CEO(1337, "lol").canDoJob(new TechJob()));
+    for (int i = 0; i < 4 * 10; i++) {
+      db.addJob(new AssistJob());
+    }
 
-    System.out.println(db.getHighestPaidEmpl().toString());
-    System.out.println(db.getLowestPaidEmpl().toString());
+    for (AJob x : db.jobs) {
+      System.out.println(x.getWorker());
+    }
+    //db.addJob(new TechJob());
+    //db.addJob(new AssistJob());
+    //db.addJob(new DevJob());
+    //db.removeJob(new AssistJob());
+    
   }
 }
