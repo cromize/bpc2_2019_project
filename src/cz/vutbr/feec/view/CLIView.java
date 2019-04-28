@@ -44,7 +44,7 @@ public class CLIView {
     System.out.printf("\n*** Typ prace: \n"
                     + " 1) Administrativni prace\n"
                     + " 2) Technicka prace\n"
-                    + " 3) Vyvojova prace");
+                    + " 3) Vyvojova prace\n");
   }
 
   public void printEmployeeDepartCount(String pos, int workerCount, String freeHours) {

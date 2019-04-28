@@ -1,8 +1,6 @@
 package cz.vutbr.feec.model.job;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import cz.vutbr.feec.core.Core;
 import cz.vutbr.feec.model.empl.AEmployee;

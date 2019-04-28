@@ -24,7 +24,8 @@ public abstract class AEmployee {
     setName(name);
     setSurname(surname);
     setWage(wage);
-    setWorkHours(Integer.MAX_VALUE);
+    //setWorkHours(Integer.MAX_VALUE);
+    setWorkHours(0);
     employeeType = EmployeeType.ACTIVE;
   }
   

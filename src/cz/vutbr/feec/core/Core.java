@@ -108,8 +108,13 @@ public class Core {
     case DEL_JOB:
       AJob jobb = cliPrompt.promptSelectJob();
       int delHours = cliPrompt.promptNumber(Integer.MAX_VALUE, "\nZadejte pocet hodin: ");
-      for (int i = 0; i < delHours; i++) {
-        db.removeJob(jobb);
+      try {
+        for (int i = 0; i < delHours; i++) {
+          db.removeJob(jobb);
+        }
+      } catch (NoSuchElementException e) {
+        System.out.println("\nNelze zrusit nezadanou praci");
+        return;
       }
       db.rebalanceJobs();
       System.out.println("\nPrace byla zrusena.");

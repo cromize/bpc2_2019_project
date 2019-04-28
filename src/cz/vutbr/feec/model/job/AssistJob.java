@@ -1,9 +1,6 @@
 package cz.vutbr.feec.model.job;
 
-import java.io.IOException;
-
 import cz.vutbr.feec.core.Core;
-import cz.vutbr.feec.core.Prompt;
 import cz.vutbr.feec.model.empl.AEmployee;
 import cz.vutbr.feec.model.empl.Assistant;
 import cz.vutbr.feec.model.empl.CEO;
