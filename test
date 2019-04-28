@@ -1,1 +1,0 @@
-{"employees":["java.util.HashMap",{"1":["cz.vutbr.feec.model.empl.Assistant",{"id":1,"name":"1","wage":150,"workHours":1,"type":"ACTIVE"}]}],"jobs":["java.util.LinkedList",[["cz.vutbr.feec.model.job.AssistJob",{"worker":["cz.vutbr.feec.model.empl.Assistant",{"id":1,"name":"1","wage":150,"workHours":1,"type":"ACTIVE"}]}]]]}
