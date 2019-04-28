@@ -1,5 +1,6 @@
 package cz.vutbr.feec.core;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7,7 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.json.JSONObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map.Entry;
 
@@ -187,6 +191,7 @@ public class Database {
     
   }
   
+  @JsonIgnore
   public int getMonthlyBudget() {
     int budget = 0;
     for (AEmployee empl : employees.values()) {
@@ -204,12 +209,26 @@ public class Database {
   }
   
   public String dumpDatabase() {
-    JSONObject employees = new JSONObject(this.employees);
-    JSONObject jobs = new JSONObject(this.jobs);
-    JSONObject all = new JSONObject(this);
-    System.out.println(all.toString());
-    return "";
-    
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.enableDefaultTyping();
+    try {
+      return mapper.writeValueAsString(this);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    } 
+    return null;
+  }
+  
+  public void loadDatabase(String dump) {
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.enableDefaultTyping();
+    try {
+      Database loadedDB = mapper.readValue(dump, new TypeReference<Database>() {});
+      this.employees = loadedDB.getEmployees();
+      this.jobs = loadedDB.getJobs();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
   
 }

@@ -1,5 +1,7 @@
 package cz.vutbr.feec.model.empl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cz.vutbr.feec.model.job.AJob;
 
 public abstract class AEmployee {
@@ -104,6 +106,7 @@ public abstract class AEmployee {
     return null;
   }
   
+  @JsonIgnore
   public String getInfo() {
     String tmp = Integer.valueOf(AEmployee.getMaxWorkHours()).toString();
     if (AEmployee.getMaxWorkHours() == Integer.MAX_VALUE) {

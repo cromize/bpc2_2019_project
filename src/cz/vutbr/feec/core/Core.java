@@ -1,13 +1,14 @@
 package cz.vutbr.feec.core;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.json.JSONObject;
-
+import cz.vutbr.feec.io.ReadFromFile;
+import cz.vutbr.feec.io.WriteToFile;
 import cz.vutbr.feec.model.empl.AEmployee;
 import cz.vutbr.feec.model.empl.Assistant;
 import cz.vutbr.feec.model.empl.EmployeeType;
@@ -181,6 +182,18 @@ public class Core {
         }
       System.out.println();
       }
+      break;
+      
+    case SAVE_DB:
+      String fn = cliPrompt.promptString("\nZadejte jmeno souboru: ");
+      String dump = db.dumpDatabase();
+      WriteToFile.write(new File(fn), dump);
+      break;
+
+    case LOAD_DB:
+      String fnn = cliPrompt.promptString("\nZadejte jmeno souboru: ");
+      String recv = ReadFromFile.read(new File(fnn));
+      db.loadDatabase(recv);
       break;
     }
     
