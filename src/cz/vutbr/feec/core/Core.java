@@ -46,8 +46,9 @@ public class Core {
       try {
         id = cliPrompt.promptUserId(true);
         db.addEmployee(position, name, id);
+        db.rebalanceJobs();
         System.out.println("\nZamestnanec byl pridan");
-      } catch (NoSuchElementException e) {
+      } catch (NoSuchElementException | InstantiationException e) {
       }
       break;
       
@@ -69,7 +70,12 @@ public class Core {
       id = cliPrompt.promptUserId(false);
       db.getEmployee(id).setType(EmployeeType.INACTIVE);
       System.out.println("\nZadany zamestnanec je oznacen jako nemocny");
-      db.rebalanceJobs();
+      try {
+        db.rebalanceJobs();
+      } catch (NoSuchElementException e) {
+        System.out.println("\nZbyvajici praci nelze prerozdelit (nedostatek pracovniku)");
+        
+      }
       break;
 
     case UNSET_SICK:
@@ -112,8 +118,8 @@ public class Core {
       AEmployee empl = db.getEmployee(id);
       for (AJob x : db.getJobs()) {
         if(jobbb.getClass().isInstance(x)) {
-          if (empl.canDoJob(x)) {
-            if (db.hasAssignedJob(empl, x)) {
+          if (db.hasAssignedJob(empl, x)) {
+            if (empl.canDoJob(x)) {
               x.doJob(this);
               return;
             } else {
@@ -121,12 +127,12 @@ public class Core {
               return;
             }
           } else {
-            System.out.println("\nZamestnanec nemuze vykonat zadany ukol");
-            return;
+            break;
           }
         }
-        
       }
+      System.out.println("\nZamestnanec nemuze vykonat zadany ukol");
+      return;
 
     case SET_MAX_WORK_HOURS:
       int num = cliPrompt.promptNumber(Integer.MAX_VALUE, "\nZadejte maximalni delku uvazku: ");
@@ -148,6 +154,9 @@ public class Core {
       }
       System.out.println();
       break;
+    
+    case PRINT_MONTHLY_BUDGET:
+      System.out.printf("\n*** Mesicni vydaje jsou: %d Kc\n", db.getMonthlyBudget());
     }
     
   }

@@ -15,7 +15,7 @@ public class DevJob extends AJob implements IJob {
   @Override
   public void doJob(Core core) {
     String rev = new StringBuilder(worker.getName()).reverse().toString();
-    System.out.println("Me jmeno pozpatku je " + rev);
+    System.out.println("\nMe jmeno pozpatku je " + rev);
   }
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Map.Entry;
 
 import cz.vutbr.feec.model.empl.AEmployee;
@@ -23,12 +24,12 @@ public class Database {
     ceoInHouse = false;
   }
   
-  public void addEmployee(AEmployee empl) {
+  public void addEmployee(AEmployee empl) throws InstantiationException {
     // there can be only one CEO
     if (empl instanceof CEO) {
       if (ceoInHouse) {
         System.out.println("Nelze pridat dalsi CEO");
-        return;
+        throw new InstantiationException();
       }
       ceoInHouse = true;
     }
@@ -36,7 +37,7 @@ public class Database {
     employees.put(empl.getId(), empl);
   }
 
-  public void addEmployee(int position, String name, int id) {
+  public void addEmployee(int position, String name, int id) throws InstantiationException {
     // there can be only one CEO
     AEmployee empl = AEmployee.getType(position);
     if (employees.containsKey(id)) {
@@ -47,7 +48,7 @@ public class Database {
     if (AEmployee.getType(position) instanceof CEO) {
       if (ceoInHouse) {
         System.out.println("\nNelze pridat dalsi CEO");
-        return;
+        throw new InstantiationException();
       }
       ceoInHouse = true;
     }
@@ -108,15 +109,21 @@ public class Database {
   public void rebalanceJobs() {
     this.resetAllWorkHours();
     for (AJob x : jobs) {
-      AEmployee empl = this.getBestWorkerForJob(x);
-      empl.increaseWorkHours(1);
-      x.setWorker(empl);
+      try {
+        AEmployee empl = this.getBestWorkerForJob(x);
+        empl.increaseWorkHours(1);
+        x.setWorker(empl);
+      } catch (NoSuchElementException e) {
+        x.setWorker(null);
+        throw new NoSuchElementException();
+      }
     }
     
   }
   
   public boolean hasAssignedJob(AEmployee worker, AJob job) { 
     for (AJob x : jobs) {
+      if (x.getWorker() == null) continue;
       if (x.getWorker().getId() == worker.getId()) {
         return true;
       }
@@ -179,10 +186,14 @@ public class Database {
   
   public int getMonthlyBudget() {
     int budget = 0;
-    for (AJob x : jobs) {
-      if (x.getWorker().getWorkHours() == 0) {
+    for (AEmployee empl : employees.values()) {
+      if (empl.getWorkHours() == 0) {
         budget += 500;
-      } else {
+      }
+    }
+    for (AJob x : jobs) {
+      if (x.getWorker() == null) continue;
+      if (x.getWorker().getWorkHours() != 0) {
         budget += x.getWorker().getWage();
       }
     }

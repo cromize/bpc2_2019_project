@@ -21,7 +21,7 @@ public class TechJob extends AJob implements IJob {
         counter++;
       }
     }
-    System.out.println("Pocet samohlasek v mem jmene je " + counter);
+    System.out.println("\nPocet samohlasek v mem jmene je " + counter);
   }
 
 }
