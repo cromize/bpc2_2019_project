@@ -1,8 +1,5 @@
 package cz.vutbr.feec.view;
 
-import java.util.List;
-
-import cz.vutbr.feec.model.empl.AEmployee;
 
 public class CLIView {
   public CLIView() {

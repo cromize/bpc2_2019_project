@@ -1,21 +1,15 @@
 package cz.vutbr.feec.core;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import cz.vutbr.feec.io.ReadFromFile;
 import cz.vutbr.feec.io.WriteToFile;
 import cz.vutbr.feec.model.empl.AEmployee;
-import cz.vutbr.feec.model.empl.Assistant;
 import cz.vutbr.feec.model.empl.EmployeeType;
 import cz.vutbr.feec.model.job.AJob;
-import cz.vutbr.feec.model.job.AssistJob;
 import cz.vutbr.feec.view.CLIView;
 
 public class Core {
