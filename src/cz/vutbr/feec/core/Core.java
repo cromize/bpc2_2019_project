@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.json.JSONObject;
+
 import cz.vutbr.feec.model.empl.AEmployee;
 import cz.vutbr.feec.model.empl.Assistant;
 import cz.vutbr.feec.model.empl.EmployeeType;

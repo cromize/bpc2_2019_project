@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
+import org.json.JSONObject;
+
 import java.util.Map.Entry;
 
 import cz.vutbr.feec.model.empl.AEmployee;
@@ -198,6 +201,15 @@ public class Database {
       }
     }
     return budget;
+  }
+  
+  public String dumpDatabase() {
+    JSONObject employees = new JSONObject(this.employees);
+    JSONObject jobs = new JSONObject(this.jobs);
+    JSONObject all = new JSONObject(this);
+    System.out.println(all.toString());
+    return "";
+    
   }
   
 }
