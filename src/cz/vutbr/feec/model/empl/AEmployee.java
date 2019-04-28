@@ -11,6 +11,8 @@ public abstract class AEmployee {
   private static int maxWorkHours = Integer.MAX_VALUE;
 
   public AEmployee()  {
+    super();
+    employeeType = EmployeeType.ACTIVE;
   }
 
   public AEmployee(int id, String name, int wage) {
@@ -18,7 +20,7 @@ public abstract class AEmployee {
     setId(id);
     setName(name);
     setWage(wage);
-    setWorkHours(0);
+    setWorkHours(Integer.MAX_VALUE);
     employeeType = EmployeeType.ACTIVE;
   }
   

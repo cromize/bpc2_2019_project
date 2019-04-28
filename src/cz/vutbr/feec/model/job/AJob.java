@@ -19,9 +19,17 @@ public abstract class AJob {
   public AEmployee getWorker() {
     return worker;
   }
-  
+
   public AEmployee[] getQualifiedList() {
     return qualified;
   }
-  
+
+  public static AJob getType(int type) {
+    if (type > 0 && type < 4) {
+      AJob[] jobs = new AJob[] {new AssistJob(), new TechJob(),
+                                new DevJob()};
+      return jobs[type-1];
+    }
+    return null;
+  }
 }
