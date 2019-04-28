@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import cz.vutbr.feec.model.job.AJob;
 
 public abstract class AEmployee {
-  protected int id;
-  protected String name;
-  protected String surname;
-  protected int wage;
-  protected int workHours;
-  protected EmployeeType employeeType;
+  private int id;
+  private String name;
+  private String surname;
+  private int wage;
+  private int workHours;
+  private EmployeeType employeeType;
   private static int maxWorkHours = Integer.MAX_VALUE;
 
   public AEmployee()  {
