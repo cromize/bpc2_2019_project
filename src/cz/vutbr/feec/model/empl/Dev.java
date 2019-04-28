@@ -5,8 +5,8 @@ public class Dev extends AEmployee {
     this.setWage(250);
   }
 
-  public Dev(int id, String name) {
-    super(id, name, 250);
+  public Dev(int id, String name, String surname) {
+    super(id, name, surname, 250);
   }
 
 }

@@ -7,6 +7,7 @@ import cz.vutbr.feec.model.job.AJob;
 public abstract class AEmployee {
   protected int id;
   protected String name;
+  protected String surname;
   protected int wage;
   protected int workHours;
   protected EmployeeType employeeType;
@@ -17,10 +18,11 @@ public abstract class AEmployee {
     employeeType = EmployeeType.ACTIVE;
   }
 
-  public AEmployee(int id, String name, int wage) {
+  public AEmployee(int id, String name, String surname, int wage) {
     super();
     setId(id);
     setName(name);
+    setSurname(surname);
     setWage(wage);
     setWorkHours(Integer.MAX_VALUE);
     employeeType = EmployeeType.ACTIVE;
@@ -64,6 +66,14 @@ public abstract class AEmployee {
 
   public void setType(EmployeeType type) {
     this.employeeType = type;
+  }
+
+  public String getSurname() {
+    return surname;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
   }
 
   public void increaseWorkHours(int workHours) {
@@ -112,11 +122,12 @@ public abstract class AEmployee {
     if (AEmployee.getMaxWorkHours() == Integer.MAX_VALUE) {
       tmp = "neomezeno";
     }
-    return String.format("Jmeno a prijmeni: %s"
+    return String.format("Jmeno: %s %s"
                        + "\tVytizeni: %d/%s (h/mesic)"
                        + "\tMzda: %d Kc/h"
                        + "\tStatus: %s",
                        this.getName(),
+                       this.getSurname(),
                        this.getWorkHours(), tmp,
                        this.getWage(),
                        this.getType());
@@ -124,7 +135,12 @@ public abstract class AEmployee {
   
   @Override 
   public String toString() {
-    return String.format("ID: %d  Jmeno: %s  Pozice: %s", getId(), getName(), getClass().getSimpleName());
+    return String.format("ID: %d  Jmeno: %s %s  Pozice: %s",
+                         getId(),
+                         getName(),
+                         getSurname(),
+                         getClass().
+                         getSimpleName());
   }
 
 }

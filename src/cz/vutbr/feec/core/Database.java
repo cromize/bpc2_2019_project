@@ -44,7 +44,7 @@ public class Database {
     employees.put(empl.getId(), empl);
   }
 
-  public void addEmployee(int position, String name, int id) throws InstantiationException {
+  public void addEmployee(int position, String name, String surname, int id) throws InstantiationException {
     // there can be only one CEO
     AEmployee empl = AEmployee.getType(position);
     if (employees.containsKey(id)) {
@@ -61,6 +61,7 @@ public class Database {
     }
 
     empl.setName(name);
+    empl.setSurname(surname);
     empl.setId(id);
     employees.put(id, empl);
   }

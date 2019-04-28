@@ -5,8 +5,8 @@ public class CEO extends AEmployee {
     this.setWage(350);
   }
 
-  public CEO(int id, String name) {
-    super(id, name, 350);
+  public CEO(int id, String name, String surname) {
+    super(id, name, surname, 350);
   }
   
 }

@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import cz.vutbr.feec.io.ReadFromFile;
 import cz.vutbr.feec.io.WriteToFile;
@@ -46,10 +48,11 @@ public class Core {
     case ADD_EMPL:
       view.printEmployeePositions();
       int position = cliPrompt.promptNumber(4, "\nZadejte moznost: ");
-      String name = cliPrompt.promptString("\nZadejte jmeno a prijmeni: ");
+      String name = cliPrompt.promptString("\nZadejte jmeno: ");
+      String surname = cliPrompt.promptString("\nZadejte prijmeni: ");
       try {
         id = cliPrompt.promptUserId(true);
-        db.addEmployee(position, name, id);
+        db.addEmployee(position, name, surname, id);
         db.rebalanceJobs();
         System.out.println("\nZamestnanec byl pridan");
       } catch (NoSuchElementException | InstantiationException e) {
@@ -164,8 +167,19 @@ public class Core {
       break;
       
     case PRINT_ALL_EMPL:
+      List<AEmployee> empls = db.getEmployees().values()
+                                               .stream()
+                                               .collect(Collectors.toList());
+      int choice = cliPrompt.promptNumber(2,
+                     "\nRadit dle ID(1), dle prijmeni sestupne(2): ");
+
+      if (choice == 2) {
+        empls = empls.stream()
+                     .sorted((o1, o2) -> o1.getSurname().compareTo(o2.getSurname()))
+                     .collect(Collectors.toList());
+      }
       System.out.println("\n*** Vypis vsech zamestnancu");
-      for (AEmployee x : db.getEmployees().values()) {
+      for (AEmployee x : empls){
         System.out.println(x.toString());
         List<AJob> jobs = db.getWorkerJobs(x);
         for (int i = 1; AJob.getType(i) != null; i++) {

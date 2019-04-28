@@ -5,8 +5,8 @@ public class Assistant extends AEmployee {
     this.setWage(150);
   }
 
-  public Assistant(int id, String name) {
-    super(id, name, 150);
+  public Assistant(int id, String name, String surname) {
+    super(id, name, surname, 150);
   }
 
 }
