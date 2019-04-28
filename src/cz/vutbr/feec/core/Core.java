@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import cz.vutbr.feec.model.empl.EmployeeType;
 import cz.vutbr.feec.view.CLIView;
 
 public class Core {
@@ -27,26 +28,48 @@ public class Core {
   }
   
   public void execute(int operation) {
+    int id = 0;
     switch (ProgramState.valueOfId(operation)) {
     case ADD_EMPL:
       view.printEmployeePositions();
       int position = promptNumber(4, "\nZadejte moznost: ");
       String name = promptName();
-      int id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
       db.addEmployee(position, name, id);
       System.out.println(db.getEmployees().toString());
       break;
       
     case DEL_EMPL:
-      int id1 = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
-      if (!db.getEmployees().containsKey(id1)) {
+      id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      if (!db.getEmployees().containsKey(id)) {
         System.out.println("\nZadany zamestnanec neexistuje");
         break;
       }
       boolean isSafe = promptIsSafe("\nOpravdu chcete smazat (A/N)? ");
       if (isSafe) {
-        db.removeEmployee(id1);
+        db.removeEmployee(id);
+        db.rebalanceJobs();
       }
+      break;
+      
+    case SET_SICK:
+      id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      if (!db.getEmployees().containsKey(id)) {
+        System.out.println("\nZadany zamestnanec neexistuje");
+        break;
+      }
+      db.getEmployee(id).setType(EmployeeType.INACTIVE);
+      System.out.println("\nZadany zamestnanec je oznacen jako nemocny");
+      db.rebalanceJobs();
+      break;
+
+    case UNSET_SICK:
+      id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      if (!db.getEmployees().containsKey(id)) {
+        System.out.println("\nZadany zamestnanec neexistuje");
+        break;
+      }
+      db.getEmployee(id).setType(EmployeeType.ACTIVE);
       break;
     }
     

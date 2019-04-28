@@ -62,7 +62,6 @@ public class Database {
       ceoInHouse = false;
     }
     employees.remove(id);
-    this.rebalanceJobs();
   }
   
   public AEmployee getEmployee(int id) {
@@ -75,7 +74,6 @@ public class Database {
   
   public void setEmployeeSick(int id) {
     employees.get(id).setType(EmployeeType.INACTIVE);
-    this.rebalanceJobs();
   }
 
   public void unsetEmployeeSick(int id) {
@@ -102,6 +100,7 @@ public class Database {
     jobs.remove(j);
   }
   
+  // TODO: warn user when rebalance is not possible
   public void rebalanceJobs() {
     this.resetAllWorkHours();
     for (AJob x : jobs) {
