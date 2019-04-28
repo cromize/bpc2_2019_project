@@ -44,9 +44,7 @@ public class Core {
       String name = cliPrompt.promptString("\nZadejte jmeno a prijmeni: ");
       id = cliPrompt.promptUserId(true);
       db.addEmployee(position, name, id);
-      System.out.println(db.getEmployees().get(1).getWage());
-      System.out.println(db.getEmployees().get(1).canDoJob(new AssistJob()));
-      System.out.println(db.getEmployees().get(1).canWorkMore());
+      System.out.println("\nZamestnanec byl pridan");
       break;
       
     case DEL_EMPL:
@@ -59,6 +57,7 @@ public class Core {
       if (isSafe) {
         db.removeEmployee(id);
         db.rebalanceJobs();
+        System.out.println("\nZamestnanec byl odstranen");
       }
       break;
       
@@ -78,11 +77,44 @@ public class Core {
     case ADD_JOB:
       AJob job = cliPrompt.promptSelectJob();
       int addHours = cliPrompt.promptNumber(Integer.MAX_VALUE, "\nZadejte pocet hodin: ");
-      for (int i = 0; i < addHours; i++) {
-        db.addJob(job);
+      try {
+        for (int i = 0; i < addHours; i++) {
+          db.addJob(job);
+        }
+      } catch (NoSuchElementException e) {
+        System.out.println("\nPraci nelze zadat zadnemu zamestnanci");
+        break;
       }
       System.out.println("\nPrace byla zadana.");
       break;
+
+    case DEL_JOB:
+      AJob jobb = cliPrompt.promptSelectJob();
+      int delHours = cliPrompt.promptNumber(Integer.MAX_VALUE, "\nZadejte pocet hodin: ");
+      for (int i = 0; i < delHours; i++) {
+        db.removeJob(jobb);
+      }
+      db.rebalanceJobs();
+      System.out.println("\nPrace byla zrusena.");
+      break;
+    
+    case DO_JOB:
+      id = cliPrompt.promptUserId(false);
+      AJob jobbb = cliPrompt.promptSelectJob();
+      AEmployee empl = db.getEmployee(id);
+      for (AJob x : db.getJobs()) {
+        if(jobbb.getClass().isInstance(x)) {
+          if (empl.canDoJob(x) && db.hasAssignedJob(empl, x)) {
+            x.doJob();
+            break;
+          } else {
+            System.out.println("\nZamestnanec nemuze vykonat zadany ukol");
+          }
+        } else {
+          System.out.println("\nZamestnanec nemuze vykonat nezadanou praci");
+          break;
+        }
+      }
     }
   }
   

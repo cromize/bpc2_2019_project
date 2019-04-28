@@ -100,6 +100,10 @@ public class Database {
     jobs.remove(j);
   }
   
+  public List<AJob> getJobs() {
+    return jobs;
+  }
+  
   // TODO: warn user when rebalance is not possible
   public void rebalanceJobs() {
     this.resetAllWorkHours();
@@ -110,6 +114,15 @@ public class Database {
     }
     
   }
+  
+  public boolean hasAssignedJob(AEmployee worker, AJob job) { 
+    for (AJob x : jobs) {
+      if (x.getWorker().getId() == worker.getId()) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   public AEmployee getBestWorkerForJob(AJob job) {
     Entry<Integer, AEmployee> entry = employees.entrySet()
@@ -119,6 +132,7 @@ public class Database {
                                                    a.getValue().canWorkMore())
                                       .min(Map.Entry.comparingByValue(Comparator.comparingInt(AEmployee::getWage)))
                                       .get();
+
     return entry.getValue();
   }
   
