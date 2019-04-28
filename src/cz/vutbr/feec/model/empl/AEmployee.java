@@ -106,7 +106,19 @@ public abstract class AEmployee {
   
   @Override 
   public String toString() {
-    return String.format("ID: %d  Jmeno: %s  Pozice: %s", getId(), getName(), getClass().getSimpleName());
+    String tmp = Integer.valueOf(AEmployee.getMaxWorkHours()).toString();
+    if (AEmployee.getMaxWorkHours() == Integer.MAX_VALUE) {
+      tmp = "neomezeno";
+    }
+    return String.format("Jmeno a prijmeni: %s"
+                       + "\tVytizeni: %d/%s (h/mesic)"
+                       + "\tMzda: %d Kc/h"
+                       + "\tStatus: %s",
+                       this.getName(),
+                       this.getWorkHours(), tmp,
+                       this.getWage(),
+                       this.getType());
+    //return String.format("ID: %d  Jmeno: %s  Pozice: %s", getId(), getName(), getClass().getSimpleName());
   }
 
 }

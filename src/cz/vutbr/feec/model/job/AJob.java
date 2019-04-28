@@ -1,5 +1,6 @@
 package cz.vutbr.feec.model.job;
 
+import cz.vutbr.feec.core.Core;
 import cz.vutbr.feec.model.empl.AEmployee;
 
 public abstract class AJob {
@@ -10,7 +11,7 @@ public abstract class AJob {
     super();
   }
   
-  public abstract void doJob();
+  public abstract void doJob(Core core);
   
   public void setWorker(AEmployee worker) {
     this.worker = worker;

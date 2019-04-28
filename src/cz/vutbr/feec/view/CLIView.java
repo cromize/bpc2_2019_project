@@ -48,7 +48,7 @@ public class CLIView {
   }
 
   public void printEmployeeDepartCount(String pos, int workerCount, String freeHours) {
-    System.out.printf("\nPozice: %s  Pocet zamestnancu: %d  Volne uvazky (h/mesic): %s",
+    System.out.printf("\nPozice: %s\tPocet zamestnancu: %d\tVolne uvazky (h/mesic): %s",
                       pos, workerCount, freeHours);
   }
 

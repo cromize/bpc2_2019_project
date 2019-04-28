@@ -1,5 +1,6 @@
 package cz.vutbr.feec.model.job;
 
+import cz.vutbr.feec.core.Core;
 import cz.vutbr.feec.model.empl.AEmployee;
 import cz.vutbr.feec.model.empl.CEO;
 import cz.vutbr.feec.model.empl.Dev;
@@ -13,7 +14,7 @@ public class TechJob extends AJob implements IJob {
   }
 
   @Override
-  public void doJob() {
+  public void doJob(Core core) {
     int counter = 0;
     for (char ch : worker.getName().toCharArray()) {
       if ("aeiou".indexOf(ch) >= 0) {

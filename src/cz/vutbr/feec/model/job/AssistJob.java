@@ -1,5 +1,9 @@
 package cz.vutbr.feec.model.job;
 
+import java.io.IOException;
+
+import cz.vutbr.feec.core.Core;
+import cz.vutbr.feec.core.Prompt;
 import cz.vutbr.feec.model.empl.AEmployee;
 import cz.vutbr.feec.model.empl.Assistant;
 import cz.vutbr.feec.model.empl.CEO;
@@ -13,8 +17,10 @@ public class AssistJob extends AJob implements IJob {
   }
 
   @Override
-  public void doJob() {
-    System.out.println("Vsechny informace o " + worker.getName());
+  public void doJob(Core core) {
+    System.out.println("\n*** Vypis informaci o zamestnanci");
+    int id = core.getPrompt().promptUserId(false);
+    System.out.println(core.getDB().getEmployee(id).toString());
   }
 
 }

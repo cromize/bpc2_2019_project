@@ -15,9 +15,9 @@ public class Prompt {
     cliInput = new BufferedReader(new InputStreamReader(System.in));
     this.core = core;
   }
-
+  
   public int promptUserId(boolean failWhenExist) {
-      int id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      int id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID zamestnance: ");
       if (failWhenExist && core.getDB().getEmployees().containsKey(id)) {
         System.out.println("\nZadane ID jiz existuje");
         throw new NoSuchElementException();
@@ -71,6 +71,10 @@ public class Prompt {
       } catch (IOException e) {
       }
     } while (true);
+  }
+
+  public static BufferedReader getCliInput() {
+    return cliInput;
   }
 
 }

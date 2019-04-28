@@ -112,19 +112,21 @@ public class Core {
       AEmployee empl = db.getEmployee(id);
       for (AJob x : db.getJobs()) {
         if(jobbb.getClass().isInstance(x)) {
-          if (empl.canDoJob(x) && db.hasAssignedJob(empl, x)) {
-            x.doJob();
-            break;
+          if (empl.canDoJob(x)) {
+            if (db.hasAssignedJob(empl, x)) {
+              x.doJob(this);
+              return;
+            } else {
+              System.out.println("\nZamestnanec nemuze vykonat nezadanou praci");
+              return;
+            }
           } else {
             System.out.println("\nZamestnanec nemuze vykonat zadany ukol");
-            break;
+            return;
           }
-        } else {
-          System.out.println("\nZamestnanec nemuze vykonat nezadanou praci");
-          break;
         }
+        
       }
-      break;
 
     case SET_MAX_WORK_HOURS:
       int num = cliPrompt.promptNumber(Integer.MAX_VALUE, "\nZadejte maximalni delku uvazku: ");
@@ -152,6 +154,10 @@ public class Core {
   
   public CLIView getView() {
     return view;
+  }
+  
+  public Prompt getPrompt() {
+    return cliPrompt;
   }
   
 }
