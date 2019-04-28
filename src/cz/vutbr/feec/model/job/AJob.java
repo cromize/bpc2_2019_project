@@ -25,7 +25,7 @@ public abstract class AJob {
     return worker;
   }
 
-  @JsonProperty(access = Access.READ_ONLY)
+  @JsonIgnore
   public AEmployee[] getQualifiedList() {
     return qualified;
   }
