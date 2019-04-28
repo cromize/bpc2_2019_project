@@ -35,6 +35,27 @@ public class Database {
 
     employees.put(empl.getId(), empl);
   }
+
+  public void addEmployee(int position, String name, int id) {
+    // there can be only one CEO
+    AEmployee empl = AEmployee.getType(position);
+    if (!employees.containsKey(id)) {
+      System.out.println("\nNelze pridat zamestnance se stejnym ID");
+      return;
+    }
+
+    if (AEmployee.getType(position) instanceof CEO) {
+      if (ceoInHouse) {
+        System.out.println("\nNelze pridat dalsi CEO");
+        return;
+      }
+      ceoInHouse = true;
+    }
+
+    empl.setName(name);
+    empl.setId(id);
+    employees.put(id, empl);
+  }
   
   public void removeEmployee(int id) {
     if (employees.get(id) instanceof CEO) {
@@ -46,6 +67,10 @@ public class Database {
   
   public AEmployee getEmployee(int id) {
     return employees.get(id);
+  }
+  
+  public Map<Integer, AEmployee> getEmployees() {
+    return employees;
   }
   
   public void setEmployeeSick(int id) {

@@ -21,7 +21,7 @@ public class Core {
     view.printWelcome();
     while (true) {
       view.printMenu();
-      int choice = promptChoice(ProgramState.values().length);
+      int choice = promptNumber(ProgramState.values().length, "\nZadejte moznost: ");
       execute(choice);
     }
   }
@@ -30,21 +30,36 @@ public class Core {
     switch (ProgramState.valueOfId(operation)) {
     case ADD_EMPL:
       view.printEmployeePositions();
-      int choice = promptChoice(4);
+      int position = promptNumber(4, "\nZadejte moznost: ");
+      String name = promptName();
+      int id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      db.addEmployee(position, name, id);
+      System.out.println(db.getEmployees().toString());
       break;
     }
     
   }
   
-  public int promptChoice(int max) {
+  public int promptNumber(int max, String msg) {
     do {
       try {
-        System.out.print("\nZadejte moznost: ");
+        System.out.print(msg);
         int choice = Integer.parseInt(cliInput.readLine());
         if (choice <= max && choice > 0) return choice;
       } catch (NumberFormatException | IOException e) {
       }
       System.out.println("Spatny vstup");
+    } while (true);
+  }
+  
+  public String promptName() {
+    do {
+      try {
+        System.out.print("\nZadejte jmeno a prijmeni: ");
+        String name = cliInput.readLine();
+        return name;
+      } catch (IOException e) {
+      }
     } while (true);
   }
 }

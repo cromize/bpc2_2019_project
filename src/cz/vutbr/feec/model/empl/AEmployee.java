@@ -92,11 +92,19 @@ public abstract class AEmployee {
   public static void setMaxWorkHours(int workHours) {
     maxWorkHours = workHours;
   }
+
+  public static AEmployee getType(int type) {
+    if (type > 0 && type < 5) {
+      AEmployee[] empl = new AEmployee[] {new Assistant(), new Tech(),
+                                          new Dev(), new CEO()};
+      return empl[type-1];
+    }
+    return null;
+  }
   
   @Override 
   public String toString() {
     return String.format("ID: %d  Jmeno: %s  Pozice: %s", getId(), getName(), getClass().getSimpleName());
   }
-  
 
 }
