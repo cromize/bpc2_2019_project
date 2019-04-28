@@ -154,9 +154,9 @@ public class Database {
   
   public List<AEmployee> getDepartmentWorkers(AEmployee department) {
     List<AEmployee> workers = new LinkedList<>();
-    for (AJob x : jobs) {
-      if (x.getWorker().getClass().isInstance(department)) {
-        workers.add(x.getWorker());
+    for (AEmployee x : employees.values()) {
+      if (x.getClass().isInstance(department)) {
+        workers.add(x);
       }
     }
     return workers;
@@ -164,13 +164,13 @@ public class Database {
   
   public int getDepartmentFreeHours(AEmployee department) {
     int freeHours = 0;
-    for (AJob x : jobs) {
-      if (x.getWorker().getClass().isInstance(department)) {
-        // when maxWorkHours is set
-        if (AEmployee.getMaxWorkHours() == Integer.MAX_VALUE) {
-          return Integer.MAX_VALUE;
-        }
-        freeHours += AEmployee.getMaxWorkHours() - x.getWorker().getWorkHours();
+    if (department instanceof CEO) return Integer.MAX_VALUE;
+    if (AEmployee.getMaxWorkHours() == Integer.MAX_VALUE) {
+      return Integer.MAX_VALUE;
+    }
+    for (AEmployee x : employees.values()) {
+      if (x.getClass().isInstance(department)) {
+        freeHours += AEmployee.getMaxWorkHours() - x.getWorkHours();
       }
     }
     return freeHours;

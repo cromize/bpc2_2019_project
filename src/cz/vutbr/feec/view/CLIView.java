@@ -1,8 +1,11 @@
 package cz.vutbr.feec.view;
 
+import java.util.List;
+
+import cz.vutbr.feec.model.empl.AEmployee;
+
 public class CLIView {
   public CLIView() {
-    
   }
   
   public void printWelcome() {
@@ -42,6 +45,11 @@ public class CLIView {
                     + " 1) Administrativni prace\n"
                     + " 2) Technicka prace\n"
                     + " 3) Vyvojova prace");
+  }
+
+  public void printEmployeeDepartCount(String pos, int workerCount, String freeHours) {
+    System.out.printf("\nPozice: %s  Pocet zamestnancu: %d  Volne uvazky (h/mesic): %s",
+                      pos, workerCount, freeHours);
   }
 
 }

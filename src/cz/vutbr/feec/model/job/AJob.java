@@ -32,4 +32,9 @@ public abstract class AJob {
     }
     return null;
   }
+  
+  @Override
+  public String toString() {
+    return this.getClass().getSimpleName();
+  }
 }

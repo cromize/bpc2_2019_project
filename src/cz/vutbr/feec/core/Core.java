@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.NoSuchElementException;
 
 import cz.vutbr.feec.model.empl.AEmployee;
+import cz.vutbr.feec.model.empl.Assistant;
 import cz.vutbr.feec.model.empl.EmployeeType;
 import cz.vutbr.feec.model.job.AJob;
 import cz.vutbr.feec.model.job.AssistJob;
@@ -42,9 +43,12 @@ public class Core {
       view.printEmployeePositions();
       int position = cliPrompt.promptNumber(4, "\nZadejte moznost: ");
       String name = cliPrompt.promptString("\nZadejte jmeno a prijmeni: ");
-      id = cliPrompt.promptUserId(true);
-      db.addEmployee(position, name, id);
-      System.out.println("\nZamestnanec byl pridan");
+      try {
+        id = cliPrompt.promptUserId(true);
+        db.addEmployee(position, name, id);
+        System.out.println("\nZamestnanec byl pridan");
+      } catch (NoSuchElementException e) {
+      }
       break;
       
     case DEL_EMPL:
@@ -82,7 +86,7 @@ public class Core {
           db.addJob(job);
         }
       } catch (NoSuchElementException e) {
-        System.out.println("\nPraci nelze zadat zadnemu zamestnanci");
+        System.out.println("\nNebyla zadana vsechna prace (nedostatek pracovniku)");
         break;
       }
       System.out.println("\nPrace byla zadana.");
@@ -99,7 +103,11 @@ public class Core {
       break;
     
     case DO_JOB:
-      id = cliPrompt.promptUserId(false);
+      try {
+        id = cliPrompt.promptUserId(false);
+      } catch (NoSuchElementException e) {
+        break;
+      }
       AJob jobbb = cliPrompt.promptSelectJob();
       AEmployee empl = db.getEmployee(id);
       for (AJob x : db.getJobs()) {
@@ -109,13 +117,37 @@ public class Core {
             break;
           } else {
             System.out.println("\nZamestnanec nemuze vykonat zadany ukol");
+            break;
           }
         } else {
           System.out.println("\nZamestnanec nemuze vykonat nezadanou praci");
           break;
         }
       }
+      break;
+
+    case SET_MAX_WORK_HOURS:
+      int num = cliPrompt.promptNumber(Integer.MAX_VALUE, "\nZadejte maximalni delku uvazku: ");
+      AEmployee.setMaxWorkHours(num);
+      System.out.println("\nMaximalni uvazek byl nastaven");
+      break;
+
+    case PRINT_EMPL_DEPART_COUNT:
+      for (int i = 1; AEmployee.getType(i) != null; i++) {
+        AEmployee depart = AEmployee.getType(i);
+        Integer freeHours = db.getDepartmentFreeHours(depart);
+        String tmp = freeHours.toString();
+        if (freeHours == Integer.MAX_VALUE) {
+          tmp = "neomezeno";
+        }
+        view.printEmployeeDepartCount(depart.getClass().getSimpleName(),
+                                      db.getDepartmentWorkers(depart).size(),
+                                      tmp);
+      }
+      System.out.println();
+      break;
     }
+    
   }
   
   public CLIView getView() {
