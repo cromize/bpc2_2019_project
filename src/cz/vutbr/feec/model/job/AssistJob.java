@@ -20,7 +20,7 @@ public class AssistJob extends AJob implements IJob {
   public void doJob(Core core) {
     System.out.println("\n*** Vypis informaci o zamestnanci");
     int id = core.getPrompt().promptUserId(false);
-    System.out.println(core.getDB().getEmployee(id).toString());
+    System.out.println(core.getDB().getEmployee(id).getInfo());
   }
 
 }

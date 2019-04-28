@@ -104,8 +104,7 @@ public abstract class AEmployee {
     return null;
   }
   
-  @Override 
-  public String toString() {
+  public String getInfo() {
     String tmp = Integer.valueOf(AEmployee.getMaxWorkHours()).toString();
     if (AEmployee.getMaxWorkHours() == Integer.MAX_VALUE) {
       tmp = "neomezeno";
@@ -118,7 +117,11 @@ public abstract class AEmployee {
                        this.getWorkHours(), tmp,
                        this.getWage(),
                        this.getType());
-    //return String.format("ID: %d  Jmeno: %s  Pozice: %s", getId(), getName(), getClass().getSimpleName());
+  }
+  
+  @Override 
+  public String toString() {
+    return String.format("ID: %d  Jmeno: %s  Pozice: %s", getId(), getName(), getClass().getSimpleName());
   }
 
 }

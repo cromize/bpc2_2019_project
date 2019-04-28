@@ -3,6 +3,7 @@ package cz.vutbr.feec.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import cz.vutbr.feec.model.empl.AEmployee;
@@ -157,6 +158,28 @@ public class Core {
     
     case PRINT_MONTHLY_BUDGET:
       System.out.printf("\n*** Mesicni vydaje jsou: %d Kc\n", db.getMonthlyBudget());
+      break;
+      
+    case PRINT_ALL_EMPL:
+      System.out.println("\n*** Vypis vsech zamestnancu");
+      for (AEmployee x : db.getEmployees().values()) {
+        System.out.println(x.toString());
+        List<AJob> jobs = db.getWorkerJobs(x);
+        for (int i = 1; AJob.getType(i) != null; i++) {
+          int hours = 0;
+          for (AJob j : jobs) {
+            if (AJob.getType(i).getClass().isInstance(j)) {
+              hours++;
+            }
+          }
+          if (hours > 0)
+            System.out.printf("  * %s - %d (h/mesic)\n",
+                              AJob.getType(i).getClass().getSimpleName(),
+                              hours);
+        }
+      System.out.println();
+      }
+      break;
     }
     
   }
