@@ -3,7 +3,9 @@ package cz.vutbr.feec.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.NoSuchElementException;
 
+import cz.vutbr.feec.model.empl.AEmployee;
 import cz.vutbr.feec.model.empl.EmployeeType;
 import cz.vutbr.feec.view.CLIView;
 
@@ -53,26 +55,28 @@ public class Core {
       break;
       
     case SET_SICK:
-      id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
-      if (!db.getEmployees().containsKey(id)) {
-        System.out.println("\nZadany zamestnanec neexistuje");
-        break;
-      }
+      id = prompUserId();
       db.getEmployee(id).setType(EmployeeType.INACTIVE);
       System.out.println("\nZadany zamestnanec je oznacen jako nemocny");
       db.rebalanceJobs();
       break;
 
     case UNSET_SICK:
-      id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
-      if (!db.getEmployees().containsKey(id)) {
-        System.out.println("\nZadany zamestnanec neexistuje");
-        break;
-      }
+      id = prompUserId();
       db.getEmployee(id).setType(EmployeeType.ACTIVE);
+      System.out.println("\nZadany zamestnanec je oznacen jako zdravy");
       break;
     }
     
+  }
+  
+  public int prompUserId() {
+      int id = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      if (!db.getEmployees().containsKey(id)) {
+        System.out.println("\nZadany zamestnanec neexistuje");
+        throw new NoSuchElementException();
+      }
+      return id;
   }
   
   public int promptNumber(int max, String msg) {
