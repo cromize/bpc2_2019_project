@@ -39,7 +39,7 @@ public class Database {
   public void addEmployee(int position, String name, int id) {
     // there can be only one CEO
     AEmployee empl = AEmployee.getType(position);
-    if (!employees.containsKey(id)) {
+    if (employees.containsKey(id)) {
       System.out.println("\nNelze pridat zamestnance se stejnym ID");
       return;
     }

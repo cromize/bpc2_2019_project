@@ -36,5 +36,12 @@ public class CLIView {
                     + " 3) Vyvojovy pracovnik\n"
                     + " 4) Reditel\n");
   }
+  
+  public void printJobTypes() {
+    System.out.printf("\n*** Typ prace: \n"
+                    + " 1) Administrativni prace\n"
+                    + " 2) Technicka prace\n"
+                    + " 3) Vyvojova prace");
+  }
 
 }

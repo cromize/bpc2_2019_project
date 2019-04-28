@@ -36,6 +36,18 @@ public class Core {
       db.addEmployee(position, name, id);
       System.out.println(db.getEmployees().toString());
       break;
+      
+    case DEL_EMPL:
+      int id1 = promptNumber(Integer.MAX_VALUE, "\nZadejte ID: ");
+      if (!db.getEmployees().containsKey(id1)) {
+        System.out.println("\nZadany zamestnanec neexistuje");
+        break;
+      }
+      boolean isSafe = promptIsSafe("\nOpravdu chcete smazat (A/N)? ");
+      if (isSafe) {
+        db.removeEmployee(id1);
+      }
+      break;
     }
     
   }
@@ -61,5 +73,21 @@ public class Core {
       } catch (IOException e) {
       }
     } while (true);
+  }
+  
+  public boolean promptIsSafe(String msg) {
+    do {
+      System.out.print(msg);
+      try {
+        String choice = cliInput.readLine();
+        if (choice.equalsIgnoreCase("a")) {
+          return true;
+        } else if (choice.equalsIgnoreCase("n")) {
+          return false;
+        }
+      } catch (IOException e) {
+      }
+    } while (true);
+    
   }
 }
