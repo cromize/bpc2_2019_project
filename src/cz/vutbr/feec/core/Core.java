@@ -71,6 +71,7 @@ public class Core {
       break;
       
     case PRINT_ALL_EMPL:
+      ft.userPrintEmployees();
       break;
       
     case SAVE_DB:

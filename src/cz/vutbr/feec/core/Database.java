@@ -113,7 +113,6 @@ public class Database {
     return jobs;
   }
   
-  // TODO: warn user when rebalance is not possible
   public void rebalanceJobs() {
     this.resetAllWorkHours();
     for (AJob x : jobs) {
