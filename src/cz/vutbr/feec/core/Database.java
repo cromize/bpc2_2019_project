@@ -105,7 +105,7 @@ public class Database {
                  .max((o1, o2) -> Integer.compare(o1.getWorker().getWage(),
                                                   o2.getWorker().getWage())).get();
 
-    j.getWorker().decreaseWorkHours(1);
+    if (j != null) j.getWorker().decreaseWorkHours(1);
     jobs.remove(j);
   }
   
@@ -122,7 +122,7 @@ public class Database {
         x.setWorker(empl);
       } catch (NoSuchElementException e) {
         x.setWorker(null);
-        throw new NoSuchElementException();
+        System.out.println("\nVsechna zadana prace nelze prerozdelit (nedostatek pracovniku)");
       }
     }
     
@@ -159,6 +159,7 @@ public class Database {
   public List<AJob> getWorkerJobs(AEmployee empl) {
     List<AJob> workerJobs = new LinkedList<>();
     for (AJob x : jobs) {
+      if (x.getWorker() == null) continue;
       if (x.getWorker().getClass().isInstance(empl)) {
         workerJobs.add(x);
       }

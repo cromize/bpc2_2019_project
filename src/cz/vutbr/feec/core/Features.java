@@ -51,11 +51,7 @@ public class Features {
     int id = core.cliPrompt.promptUserId(false);
     core.db.getEmployee(id).setType(EmployeeType.INACTIVE);
     System.out.println("\nZadany zamestnanec je oznacen jako nemocny");
-    try {
-      core.db.rebalanceJobs();
-    } catch (NoSuchElementException e) {
-      System.out.println("\nZbyvajici praci nelze prerozdelit (nedostatek pracovniku)");
-    }
+    core.db.rebalanceJobs();
   }
   
   public void userUnsetSick() {
@@ -124,6 +120,7 @@ public class Features {
   public void userSetMaxHours() {
     int num = core.cliPrompt.promptNumber(Integer.MAX_VALUE, "\nZadejte maximalni delku uvazku: ");
     AEmployee.setMaxWorkHours(num);
+    core.db.rebalanceJobs();
     System.out.println("\nMaximalni uvazek byl nastaven");
   }
   
@@ -169,7 +166,7 @@ public class Features {
           }
         }
         if (hours > 0)
-          System.out.printf("  * %s - %d (h/mesic)\n",
+          System.out.printf("  * %s - %d h/mesic\n",
                             AJob.getType(i).getClass().getSimpleName(),
                             hours);
       }
